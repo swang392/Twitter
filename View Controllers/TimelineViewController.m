@@ -10,8 +10,13 @@
 #import "APIManager.h"
 #import "AppDelegate.h"
 #import "LoginViewController.h"
+#import "TweetCell.h"
+#import "UIImageView+AFNetworking.h"
 
-@interface TimelineViewController ()
+@interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate>
+@property (nonatomic, strong) NSMutableArray *arrayOfTweets;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 
 @end
 
@@ -19,15 +24,26 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
     
     // Get timeline
     [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
         if (tweets) {
+            self.arrayOfTweets = tweets;
             NSLog(@"😎😎😎 Successfully loaded home timeline");
-            for (NSDictionary *dictionary in tweets) {
+            /*
+             for (NSDictionary *dictionary in tweets) {
                 NSString *text = dictionary[@"text"];
                 NSLog(@"%@", text);
             }
+             */
+            for (Tweet *temp in tweets)
+            {
+                NSString *text = temp.text;
+                NSLog(@"%@", text);
+            }
+            [self.tableView reloadData];
         } else {
             NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
         }
@@ -44,6 +60,54 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    //get cell and tweet
+    TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
+    Tweet *tweet = self.arrayOfTweets[indexPath.row];
+    
+    //MARK: setting everything inside the tweet cell
+    //profile image
+    NSString *URLString = tweet.user.profilePicture;
+    NSURL *url = [NSURL URLWithString:URLString];
+    NSData *urlData = [NSData dataWithContentsOfURL:url];
+    cell.pfpView.image = nil;           //clear previous image if it takes too long to load
+    [cell.pfpView setImageWithURL:url];
+    
+    //username
+    cell.usernameLabel.text = tweet.user.name;
+    
+    //username handle
+    cell.usernameHandleLabel.text = [@"@" stringByAppendingString: tweet.user.screenName];
+    
+    //timestamp/date published
+    cell.timestampLabel.text = tweet.createdAtString;
+    
+    //the actual tweet
+    cell.tweetTextLabel.text = tweet.text;
+    
+    //retweets
+    UIImage *retweeticon = [UIImage imageNamed:@"retweet-icon"];
+    if(tweet.retweeted) {
+        retweeticon = [UIImage imageNamed:@"retweet-icon-green"];
+    }
+    [cell.retweetIconView setImage:retweeticon];
+    cell.retweetCountLabel.text = [NSString stringWithFormat:@"%d", tweet.retweetCount];
+    
+    //favorite
+    UIImage *favoriteicon = [UIImage imageNamed:@"favor-icon"];
+    if(tweet.favorited) {
+        favoriteicon = [UIImage imageNamed:@"favor-icon-red"];
+    }
+    [cell.favoriteIconView setImage:favoriteicon];
+    cell.favoriteCountLabel.text = [NSString stringWithFormat:@"%d", tweet.favoriteCount];
+    
+    return cell;
+}
+ 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.arrayOfTweets.count;
 }
 
 /*
