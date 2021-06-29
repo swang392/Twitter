@@ -2,7 +2,7 @@
 
 Twitter is a basic twitter app to read and compose tweets the [Twitter API](https://apps.twitter.com/).
 
-Time spent: **X** hours spent in total
+Time spent: **4** hours spent in total
 
 ## User Stories
 
@@ -10,9 +10,9 @@ The following **required** functionality is completed:
 
 - [x] User sees app icon in home screen and styled launch screen
 - [x] User can sign in using OAuth login flow
-- [ ] User can Logout
-- [ ] User can view last 20 tweets from their home timeline
-- [ ] In the home timeline, user can view tweet with the user profile picture, username, tweet text, and timestamp.
+- [x] User can Logout
+- [x] User can view last 20 tweets from their home timeline
+- [x] In the home timeline, user can view tweet with the user profile picture, username, tweet text, and timestamp.
 - [ ] User can pull to refresh.
 - [ ] User can tap the retweet and favorite buttons in a tweet cell to retweet and/or favorite a tweet.
 - [ ] User can compose a new tweet by tapping on a compose button.
@@ -61,6 +61,9 @@ GIF created with [Kap](https://getkap.co/).
 
 Describe any challenges encountered while building the app.
 
+Reference for:
+- Using oath and storing keys safely
+
 ## Credits
 
 List an 3rd party libraries, icons, graphics, or other assets you used in your app.
@@ -69,7 +72,7 @@ List an 3rd party libraries, icons, graphics, or other assets you used in your a
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright [2021] [Sarah Wang]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
