@@ -66,9 +66,10 @@
 }
 /*
 - (void)didTweet {
-    //[_arrayOfTweets addObject:self];
+   // [_arrayOfTweets insertObject:self atIndex:0];
     [self.tableView reloadData];
 }
+ 
  */
 
 - (IBAction)didTapLogout:(id)sender {
@@ -111,20 +112,21 @@
     
     //retweets
     UIImage *retweeticon = [UIImage imageNamed:@"retweet-icon"];
-    if(tweet.retweeted) {
-        retweeticon = [UIImage imageNamed:@"retweet-icon-green"];
-    }
-    [cell.retweetIconView setImage:retweeticon];
+//    if(tweet.retweeted) {
+//        retweeticon = [UIImage imageNamed:@"retweet-icon-green"];
+//    }
+    [cell.retweetIconView setImage:retweeticon forState:UIControlStateNormal];
     cell.retweetCountLabel.text = [NSString stringWithFormat:@"%d", tweet.retweetCount];
     
     //favorite
     UIImage *favoriteicon = [UIImage imageNamed:@"favor-icon"];
-    if(tweet.favorited) {
-        favoriteicon = [UIImage imageNamed:@"favor-icon-red"];
-    }
-    [cell.favoriteIconView setImage:favoriteicon];
+//    if(tweet.favorited) {
+//        favoriteicon = [UIImage imageNamed:@"favor-icon-red"];
+//    }
+    [cell.favoriteIconView setImage:favoriteicon forState:UIControlStateNormal];
     cell.favoriteCountLabel.text = [NSString stringWithFormat:@"%d", tweet.favoriteCount];
     
+    cell.tweet = tweet;
     return cell;
 }
  
