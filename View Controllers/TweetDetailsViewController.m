@@ -11,6 +11,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "DateTools.h"
 #import "NSDate+DateTools.h"
+#import "TweetCell.h"
 
 @interface TweetDetailsViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *pfpView;
@@ -78,14 +79,71 @@
     [self.favoriteIconView setImage:favoriteicon forState:UIControlStateNormal];
     self.favoriteCountLabel.text = [NSString stringWithFormat:@"%d", self.tweet.favoriteCount];
 }
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)didTapRetweet:(id)sender {
+    NSLog(@"tapped retweet");
+    if(self.tweet.retweeted)
+    {
+        self.tweet.retweeted = NO;
+        self.tweet.retweetCount -= 1;
+        // TODO: Send a POST request to the POST favorites/create endpoint
+         [[APIManager shared] unretweet:self.tweet completion:^(Tweet *tweet, NSError *error) {
+             if(error){
+                  NSLog(@"Error unretweeting tweet: %@", error.localizedDescription);
+             }
+             else{
+                 NSLog(@"Successfully unretweeting the following Tweet: %@", tweet.text);
+             }
+         }];
+    }
+    else
+    {
+        self.tweet.retweeted = YES;
+        self.tweet.retweetCount += 1;
+        // TODO: Send a POST request to the POST favorites/create endpoint
+         [[APIManager shared] retweet:self.tweet completion:^(Tweet *tweet, NSError *error) {
+             if(error){
+                  NSLog(@"Error retweet tweet: %@", error.localizedDescription);
+             }
+             else{
+                 NSLog(@"Successfully retweet the following Tweet: %@", tweet.text);
+             }
+         }];
+    }
+    [self refreshData];
 }
-*/
+
+- (IBAction)didTapFavorite:(id)sender {
+    NSLog(@"tapped favorite");
+    if(self.tweet.favorited)
+    {
+        self.tweet.favorited = NO;
+        self.tweet.favoriteCount -= 1;
+        // TODO: Send a POST request to the POST favorites/create endpoint
+         [[APIManager shared] unfavorite:self.tweet completion:^(Tweet *tweet, NSError *error) {
+             if(error){
+                  NSLog(@"Error unfavoriting tweet: %@", error.localizedDescription);
+             }
+             else{
+                 NSLog(@"Successfully unfavoriting the following Tweet: %@", tweet.text);
+             }
+         }];
+    }
+    else
+    {
+        self.tweet.favorited = YES;
+        self.tweet.favoriteCount += 1;
+        // TODO: Send a POST request to the POST favorites/create endpoint
+         [[APIManager shared] favorite:self.tweet completion:^(Tweet *tweet, NSError *error) {
+             if(error){
+                  NSLog(@"Error favoriting tweet: %@", error.localizedDescription);
+             }
+             else{
+                 NSLog(@"Successfully favoriting the following Tweet: %@", tweet.text);
+             }
+         }];
+    }
+    [self refreshData];
+}
+
 
 @end
