@@ -27,7 +27,7 @@
             NSLog(@"😫😫😫 Error posting tweet: %@", error.localizedDescription);
         }
         else{
-            //[self.delegate didTweet:tweet];
+            [self.delegate didTweet:tweet];
             NSLog(@"😎😎😎 Successfully posted tweet");
             [self dismissViewControllerAnimated:true completion:nil];
         }
