@@ -15,6 +15,7 @@
 #import "ComposeViewController.h"
 #import "DateTools.h"
 #import "NSDate+DateTools.h"
+#import "TweetDetailsViewController.h"
 
 @interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -108,7 +109,7 @@
     
     //username handle
     cell.usernameHandleLabel.text = [@"@" stringByAppendingString: tweet.user.screenName];
-    //hello
+    
     //timestamp/date published
     NSString *timestampString = tweet.createdAtString;
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
@@ -148,9 +149,19 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    UINavigationController *navigationController = [segue destinationViewController];
-    ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
-    composeController.delegate = self;
+//    UINavigationController *navigationController = [segue destinationViewController];
+//    ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
+//    composeController.delegate = self;
+    
+    UITableViewCell *tappedCell = sender;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+    Tweet *tweet = self.arrayOfTweets[indexPath.row];
+
+    TweetDetailsViewController *tweetViewController = [segue destinationViewController];
+    tweetViewController.tweet = tweet;
+    NSLog(@"Tapping on a tweet");
+    
+    
 }
 
 

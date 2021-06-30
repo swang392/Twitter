@@ -10,6 +10,8 @@
 #import "Tweet.h"
 #import "UIImageView+AFNetworking.h"
 #import "APIManager.h"
+#import "DateTools.h"
+#import "NSDate+DateTools.h"
 
 @implementation TweetCell
 
@@ -106,8 +108,13 @@
     self.usernameHandleLabel.text = [@"@" stringByAppendingString: self.tweet.user.screenName];
     
     //timestamp/date published
-    self.timestampLabel.text = self.tweet.createdAtString;
+    //self.timestampLabel.text = self.tweet.createdAtString;
+    NSString *timestampString = self.tweet.createdAtString; 
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    [format setDateFormat:@"E MMM d HH:mm:ss Z y"];
+    NSDate *newTimestamp = [format dateFromString:timestampString];
     
+    self.timestampLabel.text = newTimestamp.shortTimeAgoSinceNow;
     //the actual tweet
     self.tweetTextLabel.text = self.tweet.text;
     
