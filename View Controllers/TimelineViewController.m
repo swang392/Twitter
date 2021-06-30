@@ -149,18 +149,19 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    UINavigationController *navigationController = [segue destinationViewController];
-//    ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
-//    composeController.delegate = self;
-    
-    UITableViewCell *tappedCell = sender;
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
-    Tweet *tweet = self.arrayOfTweets[indexPath.row];
+    if([sender isKindOfClass:[UIBarButtonItem class]]) {
+        UINavigationController *navigationController = [segue destinationViewController];
+        ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
+        composeController.delegate = self;
+    } else {
+        UITableViewCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        Tweet *tweet = self.arrayOfTweets[indexPath.row];
 
-    TweetDetailsViewController *tweetViewController = [segue destinationViewController];
-    tweetViewController.tweet = tweet;
-    NSLog(@"Tapping on a tweet");
-    
+        TweetDetailsViewController *tweetViewController = [segue destinationViewController];
+        tweetViewController.tweet = tweet;
+        NSLog(@"Tapping on a tweet");
+    }
     
 }
 
