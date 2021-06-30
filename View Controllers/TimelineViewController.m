@@ -64,13 +64,16 @@
         [self.refreshControl endRefreshing];
     }];
 }
-/*
-- (void)didTweet {
-   // [_arrayOfTweets insertObject:self atIndex:0];
+
+- (void)didTweet:(Tweet *)tweet{
+    if(!self.arrayOfTweets) {
+        self.arrayOfTweets = [[NSMutableArray alloc] init];
+    }
+    [self.arrayOfTweets addObject:tweet];
     [self.tableView reloadData];
 }
  
- */
+ 
 
 - (IBAction)didTapLogout:(id)sender {
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
