@@ -13,6 +13,8 @@
 #import "TweetCell.h"
 #import "UIImageView+AFNetworking.h"
 #import "ComposeViewController.h"
+#import "DateTools.h"
+#import "NSDate+DateTools.h"
 
 @interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -108,8 +110,13 @@
     cell.usernameHandleLabel.text = [@"@" stringByAppendingString: tweet.user.screenName];
     
     //timestamp/date published
-    cell.timestampLabel.text = tweet.createdAtString;
+    NSString *timestampString = tweet.createdAtString;
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    [format setDateFormat:@"E MMM d HH:mm:ss Z y"];
+    NSDate *newTimestamp = [format dateFromString:timestampString];
     
+    cell.timestampLabel.text = newTimestamp.shortTimeAgoSinceNow;
+
     //the actual tweet
     cell.tweetTextLabel.text = tweet.text;
     
