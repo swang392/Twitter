@@ -136,7 +136,7 @@
                                                         <action selector="didTapRetweet:" destination="uYz-Pm-61P" eventType="touchUpInside" id="0TI-Nb-alY"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="tweet" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aog-82-HtX">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tweet" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BTf-nw-77u">
                                                     <rect key="frame" x="76" y="40" width="294" height="20.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -147,14 +147,17 @@
                                                 <constraint firstItem="NSB-VR-5MU" firstAttribute="firstBaseline" secondItem="sc7-eh-5hv" secondAttribute="firstBaseline" id="05B-1O-sfO"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="ZUz-Fk-ZAi" secondAttribute="trailing" constant="20" id="0QS-Qh-oTE"/>
                                                 <constraint firstItem="sc7-eh-5hv" firstAttribute="top" secondItem="7EJ-2Z-rIA" secondAttribute="topMargin" id="20s-FK-H1a"/>
+                                                <constraint firstItem="BTf-nw-77u" firstAttribute="leading" secondItem="CgB-X7-mab" secondAttribute="trailing" constant="8" symbolic="YES" id="3wX-jn-8x3"/>
                                                 <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="ZUz-Fk-ZAi" secondAttribute="bottom" constant="10" id="5Gs-mm-KhR"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="CgB-X7-mab" secondAttribute="bottom" constant="10" id="9Lf-0s-6ih"/>
                                                 <constraint firstItem="sc7-eh-5hv" firstAttribute="leading" secondItem="CgB-X7-mab" secondAttribute="trailing" constant="8" id="CUt-0l-O7f"/>
                                                 <constraint firstItem="ZUz-Fk-ZAi" firstAttribute="leading" secondItem="zyR-IX-2KK" secondAttribute="trailing" id="Dm6-fI-xB7"/>
                                                 <constraint firstItem="lPq-c0-ttZ" firstAttribute="firstBaseline" secondItem="sc7-eh-5hv" secondAttribute="firstBaseline" id="Ghm-Px-iLY"/>
+                                                <constraint firstItem="ZUz-Fk-ZAi" firstAttribute="top" relation="greaterThanOrEqual" secondItem="BTf-nw-77u" secondAttribute="bottom" constant="10" id="Ia9-Zn-HzG"/>
                                                 <constraint firstItem="lPq-c0-ttZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="NSB-VR-5MU" secondAttribute="trailing" constant="8" id="JQE-T3-12G"/>
                                                 <constraint firstItem="zyR-IX-2KK" firstAttribute="leading" secondItem="60f-dS-p2o" secondAttribute="trailing" constant="20" id="Jqf-E9-FYx"/>
                                                 <constraint firstItem="zyR-IX-2KK" firstAttribute="centerY" secondItem="60f-dS-p2o" secondAttribute="centerY" id="M3l-GB-CMp"/>
+                                                <constraint firstItem="BTf-nw-77u" firstAttribute="top" secondItem="sc7-eh-5hv" secondAttribute="bottom" constant="8" symbolic="YES" id="PzG-xW-jWh"/>
                                                 <constraint firstItem="CgB-X7-mab" firstAttribute="top" secondItem="7EJ-2Z-rIA" secondAttribute="top" constant="8" id="R5i-dg-3xK"/>
                                                 <constraint firstItem="60f-dS-p2o" firstAttribute="leading" secondItem="V4w-mb-4ZN" secondAttribute="trailing" id="RPp-Jf-buW"/>
                                                 <constraint firstItem="60f-dS-p2o" firstAttribute="leading" secondItem="V4w-mb-4ZN" secondAttribute="trailing" id="RaJ-PX-m6L"/>
@@ -165,11 +168,8 @@
                                                 <constraint firstItem="NSB-VR-5MU" firstAttribute="firstBaseline" secondItem="sc7-eh-5hv" secondAttribute="firstBaseline" id="iBQ-AO-IPo"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="60f-dS-p2o" secondAttribute="bottom" constant="4" id="lPS-Fn-hBn"/>
                                                 <constraint firstItem="ZUz-Fk-ZAi" firstAttribute="centerY" secondItem="zyR-IX-2KK" secondAttribute="centerY" id="mgO-JD-PkM"/>
-                                                <constraint firstItem="Aog-82-HtX" firstAttribute="top" secondItem="sc7-eh-5hv" secondAttribute="bottom" constant="8" id="pPm-HX-5Um"/>
-                                                <constraint firstItem="60f-dS-p2o" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Aog-82-HtX" secondAttribute="bottom" id="sDY-je-Lhi"/>
                                                 <constraint firstItem="NSB-VR-5MU" firstAttribute="leading" secondItem="sc7-eh-5hv" secondAttribute="trailing" constant="8" id="vP5-Ie-pFV"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="Aog-82-HtX" secondAttribute="trailing" id="xMf-Ra-aCx"/>
-                                                <constraint firstItem="Aog-82-HtX" firstAttribute="leading" secondItem="CgB-X7-mab" secondAttribute="trailing" constant="8" symbolic="YES" id="yUv-Rc-ZX8"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="BTf-nw-77u" secondAttribute="trailing" id="yYo-IL-KW1"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="lPq-c0-ttZ" secondAttribute="trailing" constant="8" id="ygb-Sn-1aB"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -180,7 +180,7 @@
                                             <outlet property="retweetCountLabel" destination="60f-dS-p2o" id="Ic5-2w-huc"/>
                                             <outlet property="retweetIconView" destination="V4w-mb-4ZN" id="3sT-xf-ew9"/>
                                             <outlet property="timestampLabel" destination="lPq-c0-ttZ" id="Rha-lS-Tmg"/>
-                                            <outlet property="tweetTextLabel" destination="Aog-82-HtX" id="9a0-S7-fvY"/>
+                                            <outlet property="tweetTextLabel" destination="BTf-nw-77u" id="GGF-yQ-JZi"/>
                                             <outlet property="usernameHandleLabel" destination="NSB-VR-5MU" id="ZaJ-DZ-YLI"/>
                                             <outlet property="usernameLabel" destination="sc7-eh-5hv" id="iYB-Ks-tdV"/>
                                             <segue destination="XO3-ge-LXJ" kind="show" id="e15-n6-xX0"/>
@@ -237,17 +237,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Compose a message here!" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xxN-TW-SM0">
-                                <rect key="frame" x="0.0" y="44" width="375" height="169"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xxN-TW-SM0">
+                                <rect key="frame" x="15" y="71" width="360" height="170"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="170" id="iew-oa-gmc"/>
+                                </constraints>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tBu-Ve-QYQ">
+                                <rect key="frame" x="24" y="249" width="311" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Y5G-cY-ujT"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="xxN-TW-SM0" firstAttribute="top" secondItem="Y5G-cY-ujT" secondAttribute="top" constant="15" id="MGs-kq-5k2"/>
+                            <constraint firstItem="Y5G-cY-ujT" firstAttribute="trailing" secondItem="xxN-TW-SM0" secondAttribute="trailing" constant="15" id="duf-Ab-01j"/>
+                            <constraint firstItem="xxN-TW-SM0" firstAttribute="leading" secondItem="Y5G-cY-ujT" secondAttribute="leading" constant="15" id="w2a-xY-4SP"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ftk-4V-CkL">
                         <barButtonItem key="leftBarButtonItem" title="Close" id="pXr-dZ-Ljf">
@@ -262,12 +276,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="characterCountLabel" destination="tBu-Ve-QYQ" id="XqX-34-Vaz"/>
                         <outlet property="postView" destination="xxN-TW-SM0" id="t1U-As-7Ag"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gSB-tO-Idq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3361" y="37"/>
+            <point key="canvasLocation" x="3360" y="36.96682464454976"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="WUT-Ke-VeR">
