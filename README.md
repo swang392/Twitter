@@ -57,6 +57,7 @@ User stories for home timeline, liking/retweeting features, details view, and co
 <img src='https://i.imgur.com/KS5SEoD.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 Testing character count overload
+
 <img src='https://i.imgur.com/17zfOvB.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [EZGIF](https://ezgif.com/video-to-gif).
