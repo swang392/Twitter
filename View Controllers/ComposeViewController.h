@@ -13,12 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol ComposeViewControllerDelegate
 
-
 - (void)didTweet:(Tweet *)tweet; 
 
 @end
-
-
 
 @interface ComposeViewController : UIViewController
 

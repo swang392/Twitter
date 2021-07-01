@@ -34,27 +34,18 @@
     
     [self fetchTweets];
     
-    //initialize and bind the action to the refresh control
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
 
-    //insert the refresh control into the list
-    self.refreshControl = [[UIRefreshControl alloc] init]; //initializing pull to refresh control
+    self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchTweets) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
 }
 
 - (void)fetchTweets {
-    // Get timeline
     [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
         if (tweets) {
             self.arrayOfTweets = tweets;
             NSLog(@"😎😎😎 Successfully loaded home timeline");
-            /*
-             for (NSDictionary *dictionary in tweets) {
-                NSString *text = dictionary[@"text"];
-                NSLog(@"%@", text);
-            }
-             */
             for (Tweet *temp in tweets)
             {
                 NSString *text = temp.text;
@@ -72,7 +63,7 @@
     if(!self.arrayOfTweets) {
         self.arrayOfTweets = [[NSMutableArray alloc] init];
     }
-    [self.arrayOfTweets addObject:tweet];
+    [self.arrayOfTweets insertObject:tweet atIndex:0];
     [self.tableView reloadData];
 }
  
@@ -92,25 +83,20 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    //get cell and tweet
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
     Tweet *tweet = self.arrayOfTweets[indexPath.row];
     
     //MARK: setting everything inside the tweet cell
-    //profile image
     NSString *URLString = tweet.user.profilePicture;
     NSURL *url = [NSURL URLWithString:URLString];
-    NSData *urlData = [NSData dataWithContentsOfURL:url];
-    cell.pfpView.image = nil;           //clear previous image if it takes too long to load
+
+    cell.pfpView.image = nil;
     [cell.pfpView setImageWithURL:url];
     
-    //username
     cell.usernameLabel.text = tweet.user.name;
     
-    //username handle
     cell.usernameHandleLabel.text = [@"@" stringByAppendingString: tweet.user.screenName];
     
-    //timestamp/date published
     NSString *timestampString = tweet.createdAtString;
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
     [format setDateFormat:@"E MMM d HH:mm:ss Z y"];
@@ -118,26 +104,24 @@
     
     cell.timestampLabel.text = newTimestamp.shortTimeAgoSinceNow;
 
-    //the actual tweet
     cell.tweetTextLabel.text = tweet.text;
     
-    //retweets
     UIImage *retweeticon = [UIImage imageNamed:@"retweet-icon"];
-//    if(tweet.retweeted) {
-//        retweeticon = [UIImage imageNamed:@"retweet-icon-green"];
-//    }
+    if(tweet.retweeted) {
+        retweeticon = [UIImage imageNamed:@"retweet-icon-green"];
+    }
     [cell.retweetIconView setImage:retweeticon forState:UIControlStateNormal];
     cell.retweetCountLabel.text = [NSString stringWithFormat:@"%d", tweet.retweetCount];
     
-    //favorite
     UIImage *favoriteicon = [UIImage imageNamed:@"favor-icon"];
-//    if(tweet.favorited) {
-//        favoriteicon = [UIImage imageNamed:@"favor-icon-red"];
-//    }
+    if(tweet.favorited) {
+        favoriteicon = [UIImage imageNamed:@"favor-icon-red"];
+    }
     [cell.favoriteIconView setImage:favoriteicon forState:UIControlStateNormal];
     cell.favoriteCountLabel.text = [NSString stringWithFormat:@"%d", tweet.favoriteCount];
     
     cell.tweet = tweet;
+    
     return cell;
 }
  
@@ -160,6 +144,7 @@
 
         TweetDetailsViewController *tweetViewController = [segue destinationViewController];
         tweetViewController.tweet = tweet;
+        
         NSLog(@"Tapping on a tweet");
     }
     

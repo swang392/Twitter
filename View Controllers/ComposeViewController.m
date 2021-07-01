@@ -31,12 +31,7 @@
             NSLog(@"😎😎😎 Successfully posted tweet");
             [self dismissViewControllerAnimated:true completion:nil];
         }
-        
     }];
-    
-}
-
-- (IBAction)tweetButton:(id)sender {
     
 }
 
