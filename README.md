@@ -54,22 +54,28 @@ Please list two areas of the assignment you'd like to **discuss further with you
 Here's a walkthrough of implemented user stories:
 
 User stories for home timeline, liking/retweeting features, details view, and composing tweets
-<img src='https://i.imgur.com/KS5SEoD.gif' title='Video Walkthrough' width='200' alt='Video Walkthrough' />
+
+<img src='https://i.imgur.com/KS5SEoD.gif' title='Video Walkthrough' width='300' alt='Video Walkthrough' />
 
 Testing character count overload
-<img src='https://i.imgur.com/17zfOvB.gif' title='Video Walkthrough' width='200' alt='Video Walkthrough' />
+
+<img src='https://i.imgur.com/17zfOvB.gif' title='Video Walkthrough' width='300' alt='Video Walkthrough' />
 
 Logging in through OAuth
-<img src='https://i.imgur.com/F2JW0io.gif' title='Video Walkthrough' width='200' alt='Video Walkthrough' />
+
+<img src='https://i.imgur.com/F2JW0io.gif' title='Video Walkthrough' width='300' alt='Video Walkthrough' />
 
 Autolayout while rotating device
-<img src='https://i.imgur.com/MUbKfQO.gif' title='Video Walkthrough' width='200' alt='Video Walkthrough' />
+
+<img src='https://i.imgur.com/MUbKfQO.gif' title='Video Walkthrough' width='300' alt='Video Walkthrough' />
 
 Autolayout on iPhone SE demo (with logging out)
-<img src='https://i.imgur.com/VWFfLSa.gif' title='Video Walkthrough' width='200' alt='Video Walkthrough' />
+
+<img src='https://i.imgur.com/VWFfLSa.gif' title='Video Walkthrough' width='300' alt='Video Walkthrough' />
 
 Autolayout on iPhone 12 Pro Max 
-<img src='https://i.imgur.com/GP2stTP.gif' title='Video Walkthrough' width='200' alt='Video Walkthrough' />
+
+<img src='https://i.imgur.com/GP2stTP.gif' title='Video Walkthrough' width='300' alt='Video Walkthrough' />
 
 
 GIF created with [EZGIF](https://ezgif.com/video-to-gif).
