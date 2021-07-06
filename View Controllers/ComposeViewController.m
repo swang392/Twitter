@@ -14,7 +14,6 @@
 @property (weak, nonatomic) IBOutlet UITextView *postView;
 @property (weak, nonatomic) IBOutlet UILabel *characterCountLabel;
 
-
 @end
 
 @implementation ComposeViewController
@@ -22,7 +21,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
     self.postView.delegate = self;
     self.postView.layer.borderWidth = 2.0f;
@@ -31,7 +29,7 @@
 }
 - (IBAction)didTweet:(UIBarButtonItem *)sender {
     [[APIManager shared] postStatusWithText:(self.postView.text) completion:^(Tweet * tweet, NSError * error){
-        if (error != nil){
+        if (error != nil || tweet == nil){
             NSLog(@"😫😫😫 Error posting tweet: %@", error.localizedDescription);
         }
         else{
@@ -50,7 +48,6 @@
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
     
     int characterLimit = 140;
-    
     NSString *newText = [self.postView.text stringByReplacingCharactersInRange:range withString:text];
     
     if(newText.length >= characterLimit)
@@ -60,7 +57,6 @@
     else {
         self.characterCountLabel.text = [NSString stringWithFormat:@"%d", newText.length];
     }
-    
     return newText.length < characterLimit;
 }
  

@@ -79,14 +79,12 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
     Tweet *tweet = self.arrayOfTweets[indexPath.row];
     
-    //MARK: setting everything inside the tweet cell
     NSString *URLString = tweet.user.profilePicture;
     NSURL *url = [NSURL URLWithString:URLString];
 
@@ -144,8 +142,6 @@
 
         TweetDetailsViewController *tweetViewController = [segue destinationViewController];
         tweetViewController.tweet = tweet;
-        
-        NSLog(@"Tapping on a tweet");
     }
     
 }

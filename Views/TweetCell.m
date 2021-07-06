@@ -32,7 +32,6 @@
     {
         self.tweet.favorited = NO;
         self.tweet.favoriteCount -= 1;
-        // TODO: Send a POST request to the POST favorites/create endpoint
          [[APIManager shared] unfavorite:self.tweet completion:^(Tweet *tweet, NSError *error) {
              if(error){
                   NSLog(@"Error unfavoriting tweet: %@", error.localizedDescription);
@@ -46,7 +45,6 @@
     {
         self.tweet.favorited = YES;
         self.tweet.favoriteCount += 1;
-        // TODO: Send a POST request to the POST favorites/create endpoint
          [[APIManager shared] favorite:self.tweet completion:^(Tweet *tweet, NSError *error) {
              if(error){
                   NSLog(@"Error favoriting tweet: %@", error.localizedDescription);
@@ -65,7 +63,6 @@
     {
         self.tweet.retweeted = NO;
         self.tweet.retweetCount -= 1;
-        // TODO: Send a POST request to the POST favorites/create endpoint
          [[APIManager shared] unretweet:self.tweet completion:^(Tweet *tweet, NSError *error) {
              if(error){
                   NSLog(@"Error unretweeting tweet: %@", error.localizedDescription);
@@ -79,7 +76,6 @@
     {
         self.tweet.retweeted = YES;
         self.tweet.retweetCount += 1;
-        // TODO: Send a POST request to the POST favorites/create endpoint
          [[APIManager shared] retweet:self.tweet completion:^(Tweet *tweet, NSError *error) {
              if(error){
                   NSLog(@"Error retweet tweet: %@", error.localizedDescription);
@@ -93,32 +89,25 @@
 }
 
 - (void)refreshData {
-    //MARK: setting everything inside the tweet cell
-    //profile image
     NSString *URLString = self.tweet.user.profilePicture;
     NSURL *url = [NSURL URLWithString:URLString];
     NSData *urlData = [NSData dataWithContentsOfURL:url];
     self.pfpView.image = nil;           //clear previous image if it takes too long to load
     [self.pfpView setImageWithURL:url];
     
-    //username
     self.usernameLabel.text = self.tweet.user.name;
     
-    //username handle
     self.usernameHandleLabel.text = [@"@" stringByAppendingString: self.tweet.user.screenName];
     
-    //timestamp/date published
-    //self.timestampLabel.text = self.tweet.createdAtString;
     NSString *timestampString = self.tweet.createdAtString; 
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
     [format setDateFormat:@"E MMM d HH:mm:ss Z y"];
     NSDate *newTimestamp = [format dateFromString:timestampString];
     
     self.timestampLabel.text = newTimestamp.shortTimeAgoSinceNow;
-    //the actual tweet
+
     self.tweetTextLabel.text = self.tweet.text;
     
-    //retweets
     UIImage *retweeticon = [UIImage imageNamed:@"retweet-icon"];
     if(self.tweet.retweeted) {
         retweeticon = [UIImage imageNamed:@"retweet-icon-green"];
@@ -126,7 +115,6 @@
     [self.retweetIconView setImage:retweeticon forState:UIControlStateNormal];
     self.retweetCountLabel.text = [NSString stringWithFormat:@"%d", self.tweet.retweetCount];
     
-    //favorite
     UIImage *favoriteicon = [UIImage imageNamed:@"favor-icon"];
     if(self.tweet.favorited) {
         favoriteicon = [UIImage imageNamed:@"favor-icon-red"];
