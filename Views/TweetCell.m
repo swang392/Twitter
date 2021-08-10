@@ -17,27 +17,20 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 - (IBAction)didTapFavorite:(id)sender {
-    NSLog(@"tapped favorite");
     if(self.tweet.favorited)
     {
         self.tweet.favorited = NO;
         self.tweet.favoriteCount -= 1;
          [[APIManager shared] unfavorite:self.tweet completion:^(Tweet *tweet, NSError *error) {
              if(error){
-                  NSLog(@"Error unfavoriting tweet: %@", error.localizedDescription);
-             }
-             else{
-                 NSLog(@"Successfully unfavoriting the following Tweet: %@", tweet.text);
+                  //TODO: show error
              }
          }];
     }
@@ -47,10 +40,7 @@
         self.tweet.favoriteCount += 1;
          [[APIManager shared] favorite:self.tweet completion:^(Tweet *tweet, NSError *error) {
              if(error){
-                  NSLog(@"Error favoriting tweet: %@", error.localizedDescription);
-             }
-             else{
-                 NSLog(@"Successfully favoriting the following Tweet: %@", tweet.text);
+                 //TODO: show error
              }
          }];
     }
@@ -65,10 +55,7 @@
         self.tweet.retweetCount -= 1;
          [[APIManager shared] unretweet:self.tweet completion:^(Tweet *tweet, NSError *error) {
              if(error){
-                  NSLog(@"Error unretweeting tweet: %@", error.localizedDescription);
-             }
-             else{
-                 NSLog(@"Successfully unretweeting the following Tweet: %@", tweet.text);
+                  //TODO: show error
              }
          }];
     }
@@ -78,10 +65,7 @@
         self.tweet.retweetCount += 1;
          [[APIManager shared] retweet:self.tweet completion:^(Tweet *tweet, NSError *error) {
              if(error){
-                  NSLog(@"Error retweet tweet: %@", error.localizedDescription);
-             }
-             else{
-                 NSLog(@"Successfully retweet the following Tweet: %@", tweet.text);
+                 //TODO: show error
              }
          }];
     }
@@ -92,7 +76,7 @@
     NSString *URLString = self.tweet.user.profilePicture;
     NSURL *url = [NSURL URLWithString:URLString];
     NSData *urlData = [NSData dataWithContentsOfURL:url];
-    self.pfpView.image = nil;           //clear previous image if it takes too long to load
+    self.pfpView.image = nil;
     [self.pfpView setImageWithURL:url];
     
     self.usernameLabel.text = self.tweet.user.name;
@@ -109,14 +93,14 @@
     self.tweetTextLabel.text = self.tweet.text;
     
     UIImage *retweeticon = [UIImage imageNamed:@"retweet-icon"];
-    if(self.tweet.retweeted) {
+    if (self.tweet.retweeted) {
         retweeticon = [UIImage imageNamed:@"retweet-icon-green"];
     }
     [self.retweetIconView setImage:retweeticon forState:UIControlStateNormal];
     self.retweetCountLabel.text = [NSString stringWithFormat:@"%d", self.tweet.retweetCount];
     
     UIImage *favoriteicon = [UIImage imageNamed:@"favor-icon"];
-    if(self.tweet.favorited) {
+    if (self.tweet.favorited) {
         favoriteicon = [UIImage imageNamed:@"favor-icon-red"];
     }
     [self.favoriteIconView setImage:favoriteicon forState:UIControlStateNormal];
