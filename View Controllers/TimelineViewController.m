@@ -34,8 +34,6 @@
     
     [self fetchTweets];
     
-    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchTweets) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
@@ -45,36 +43,33 @@
     [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
         if (tweets) {
             self.arrayOfTweets = tweets;
-            NSLog(@"😎😎😎 Successfully loaded home timeline");
             for (Tweet *temp in tweets)
             {
                 NSString *text = temp.text;
                 NSLog(@"%@", text);
             }
             [self.tableView reloadData];
-        } else {
-            NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
         }
         [self.refreshControl endRefreshing];
     }];
 }
 
 - (void)didTweet:(Tweet *)tweet{
-    if(!self.arrayOfTweets) {
+    if (!self.arrayOfTweets) {
         self.arrayOfTweets = [[NSMutableArray alloc] init];
     }
     [self.arrayOfTweets insertObject:tweet atIndex:0];
     [self.tableView reloadData];
 }
- 
- 
+
+
 
 - (IBAction)didTapLogout:(id)sender {
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
     appDelegate.window.rootViewController = loginViewController;
-    [[APIManager shared] logout];               //clear out access tokens
+    [[APIManager shared] logout];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -87,7 +82,7 @@
     
     NSString *URLString = tweet.user.profilePicture;
     NSURL *url = [NSURL URLWithString:URLString];
-
+    
     cell.pfpView.image = nil;
     [cell.pfpView setImageWithURL:url];
     
@@ -101,18 +96,18 @@
     NSDate *newTimestamp = [format dateFromString:timestampString];
     
     cell.timestampLabel.text = newTimestamp.shortTimeAgoSinceNow;
-
+    
     cell.tweetTextLabel.text = tweet.text;
     
     UIImage *retweeticon = [UIImage imageNamed:@"retweet-icon"];
-    if(tweet.retweeted) {
+    if (tweet.retweeted) {
         retweeticon = [UIImage imageNamed:@"retweet-icon-green"];
     }
     [cell.retweetIconView setImage:retweeticon forState:UIControlStateNormal];
     cell.retweetCountLabel.text = [NSString stringWithFormat:@"%d", tweet.retweetCount];
     
     UIImage *favoriteicon = [UIImage imageNamed:@"favor-icon"];
-    if(tweet.favorited) {
+    if (tweet.favorited) {
         favoriteicon = [UIImage imageNamed:@"favor-icon-red"];
     }
     [cell.favoriteIconView setImage:favoriteicon forState:UIControlStateNormal];
@@ -122,16 +117,13 @@
     
     return cell;
 }
- 
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.arrayOfTweets.count;
 }
 
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([sender isKindOfClass:[UIBarButtonItem class]]) {
+    if ([sender isKindOfClass:[UIBarButtonItem class]]) {
         UINavigationController *navigationController = [segue destinationViewController];
         ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
         composeController.delegate = self;
@@ -139,13 +131,10 @@
         UITableViewCell *tappedCell = sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
         Tweet *tweet = self.arrayOfTweets[indexPath.row];
-
+        
         TweetDetailsViewController *tweetViewController = [segue destinationViewController];
         tweetViewController.tweet = tweet;
     }
-    
 }
-
-
 
 @end
