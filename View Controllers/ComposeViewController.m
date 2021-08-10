@@ -30,15 +30,13 @@
 - (IBAction)didTweet:(UIBarButtonItem *)sender {
     [[APIManager shared] postStatusWithText:(self.postView.text) completion:^(Tweet * tweet, NSError * error){
         if (error != nil || tweet == nil){
-            NSLog(@"😫😫😫 Error posting tweet: %@", error.localizedDescription);
+            //TODO: show error
         }
         else{
             [self.delegate didTweet:tweet];
-            NSLog(@"😎😎😎 Successfully posted tweet");
             [self dismissViewControllerAnimated:true completion:nil];
         }
     }];
-    
 }
 
 - (IBAction)closeButton:(id)sender {
@@ -46,11 +44,10 @@
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
-    
     int characterLimit = 140;
     NSString *newText = [self.postView.text stringByReplacingCharactersInRange:range withString:text];
     
-    if(newText.length >= characterLimit)
+    if (newText.length >= characterLimit)
     {
         self.characterCountLabel.text = @"exceeded maximum characters";
     }
